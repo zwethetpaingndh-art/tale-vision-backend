@@ -1,5 +1,9 @@
 fastapi
-uvicorn
+uvicorn[standard]
 python-dotenv
 requests
+yt-dlp
+moviepy
+gTTS
+
 
