@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tale Vision Recap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; }
+        .gold-text { color: #d4af37; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+    <h1 class="text-4xl font-bold gold-text mb-4">Tale Vision Recap</h1>
+    <p class="mb-8 text-gray-400">AI စနစ်ဖြင့် ရုပ်ရှင်များကို မြန်မာလို အနှစ်ချုပ်ပေးသည်။</p>
+    
+    <div class="w-full max-w-md">
+        <input id="videoLink" type="text" placeholder="YouTube Link ထည့်ပါ" 
+               class="w-full p-3 rounded bg-gray-800 border border-gray-700 mb-4 focus:outline-none focus:border-yellow-500">
+        
+        <button onclick="startAI()" class="w-full bg-yellow-600 hover:bg-yellow-700 p-3 rounded font-bold transition">
+            Start AI Recap
+        </button>
+    </div>
+
+    <script>
+        async function startAI() {
+            const link = document.getElementById('videoLink').value;
+            if(!link) return alert("Link အရင်ထည့်ပါ");
+            
+            // သင်ရလာတဲ့ Railway Link ကို ဒီအောက်မှာ အစားထိုးပါ
+            const railwayURL = "https://tale-vision-backend-production.up.railway.app”;
+            
+            alert("AI စတင်အလုပ်လုပ်နေပါပြီ။ ခဏစောင့်ပေးပါ။");
+            
+            try {
+                await fetch(railwayURL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({url: link})
+                });
+            } catch (e) {
+                console.log("Error:", e);
+            }
+        }
+    </script>
+</body>
+</html>
